@@ -1,0 +1,56 @@
+{% extends "base.html"%}
+{% load urlify %}
+{% load crispy_forms_tags %}
+
+{% block head_title %}
+{{instance.title}} | {{block.super}}
+{% endblock head_title%}
+{{instace.post_topic}}
+<style>
+{% block style %}
+h2 {
+	color: #777BB7;
+}
+{% endblock style %}
+</style>
+
+{% block content %}
+<div class="col-sm-8 col-sm-offset-3">
+
+			<p>{{ cmnt.content }}</p>
+			<footer>
+				<i>by: {{cmnt.user}} on {{cmnt.timestamp | timesince}} </i> | 
+				{% if cmnt.children.count > 0 %}
+					{{cmnt.children.count}} Comment{% if cmnt.children.count > 1%}s{% endif %} | 
+				{% endif %}
+				{% if request.user == cmnt.user %}
+					<a class='btn btn-danger' href="{{cmnt.get_delete_url}}">Delete</a>
+				{% endif %}
+			</footer>
+			<hr/>
+			<div class=''>
+				{% for child_comment in cmnt.children %}
+				<blockquote>
+					<p>{{ child_comment.content }}</p>
+					<footer>
+						<i>by: {{child_comment.user}} on {{child_comment.timestamp | timesince}} </i>
+						{% if request.user == child_comment.user %} <a class='btn btn-danger' href="{{child_comment.get_delete_url}}">Delete</a> {% endif %}
+					</footer>
+				</blockquote>
+				{% endfor %}
+				{% if request.user.is_authenticated %}
+				<form method="POST" action='.'>
+					{% csrf_token %}
+					{{form | crispy}}	
+					<!-- tha value in the inpu below is going to be equal to the parent comment -->
+					<input type="hidden" name='parent_id' value="{{cmnt.id}}">
+					<input type='submit' class='btn btn-default' value='Post Reply' />
+				</form>
+				{% else %}
+					<p><a href="/login">You must Login to comment</a></p>
+				{% endif %}
+			</div>
+
+</div>
+	
+{% endblock content %}

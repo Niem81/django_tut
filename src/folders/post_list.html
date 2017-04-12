@@ -1,0 +1,94 @@
+{% extends "base.html"%}
+
+{% block head_title %}
+{{instance.title}} | {{block.super}}
+{% endblock head_title%}
+
+<style>
+{% block style %}
+h2 {
+	color: #777BB7;
+}
+{% endblock style %}
+</style>
+
+{% block content %}
+	<div class="jumbotron">
+		<div class="row">
+			<h1>Night Owl Blog!</h1>
+			<section>
+				<p>Comenta sobre los temas que mas desees o creo tus propios temas y compartelo con tus amigos!
+					{{ data }}
+				</p>
+				<form method='GET' action="" class='row'>
+					<div class='col-sm-6'>
+					<div class="input-group">
+						<input type="text" class="form-control" name='q' value="{{request.GET.q}}" placeholder="Search">
+						<span class='input-group-btn'>
+							<!-- <input class='btn btn-default' type='submit' value='Buscar Post'> -->
+							<button type="submit" class="btn btn-default"><i class='fa fa-search'></i> Buscar Post</button>
+						</span>
+					</div></div>
+				</form>
+			</section>
+		</div>
+	</div>
+	<div class='col-sm-8 col-sm-offset-2'>
+	
+	{% for obj in object_list %}
+	<div class="row">
+	<div class="col-sm-12">
+		<div class="thumbnail">
+			{% if obj.image %}
+			<img src="{{obj.image.url}}" class="img-responsive"/>
+			{% endif %}
+			<div class="caption post-detail-item">
+				<!-- <li><a href="/posts/{{obj.id}}">{{obj.title}}</a></li> -->
+				<!-- si se usa namespaces, usar en abajo 'posts:detail' y sin es solo detail -->
+				<!-- <li><a href="#{#% url 'posts:detail' id=obj.id %}">{{obj.title}}</a></li> -->
+				{% if obj.draft %}
+					<h3>Draft {% if obj.publish > today %}| Future Post{% endif %}</h3>
+				{% endif %}
+				<h3><a href="{{obj.get_absolute_url}}">{{obj.title}}</a>
+					<!-- <br/><small>#obj.timestamp|timesince}}</small> -->
+					{% if obj.draft %}
+					<span style="color:red;">Draft</span>
+					{% endif %}
+					<br/><small>{{obj.publish}}</small>
+				</h3>
+				<p><b>Tema: {{obj.post_topic}}</b></p>
+				{% if obj.user.get_full_name %}
+				<p><i>Escrito por: {{ obj.user.get_full_name }}</i></p>
+				{% endif %}
+				{{ obj.get_markdown }}
+				<!-- after installing django-markdown-deux, we are gonna be calling to a function get markdown -->
+				<!-- to be used instead of obj.content -->
+				<p><a href="{{obj.get_absolute_url}}" class="btn btn-primary" role="button">View</a></p>
+			</div>
+		</div>
+	</div>
+	<hr/>
+	<!-- {#% cycle "" "<div class='col-sm-12'><hr/></div></div><div class='row'>"%} -->
+	</div>
+	{% endfor %}
+		
+	<div class="pagination">
+		<span class="step-links">
+		{% if object_list.has_previous %}
+			<a href="?{{page_request_var}}={{ object_list.previous_page_number }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">previous</a>
+		{% endif %}
+
+		<span class="current">
+			Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
+		</span>
+
+		{% if object_list.has_next %}
+			<a href="?{{page_request_var}}={{ object_list.next_page_number }}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">next</a>
+		{% endif %}
+		</span>
+	</div>
+
+	</div>		
+{% endblock content %}
+
+

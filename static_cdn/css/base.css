@@ -1,0 +1,20 @@
+body {
+	padding-top: 70px;
+}
+
+h1, h2 {
+	color: #345678;
+}
+
+.wmd-panel {
+	margin-right: 0px !important;
+	margin-left: 0px !important;
+}
+
+.controls textarea {
+	height: 80px;
+}
+
+.comment-reply {
+	display: none;
+}

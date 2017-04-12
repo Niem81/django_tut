@@ -1,0 +1,32 @@
+{% extends "base.html"%}
+{{block.super}}
+{% load crispy_forms_tags %}
+
+<style>
+{% block style %}
+h2 {
+	color: #734577;
+}
+{% endblock style %}
+</style>
+
+{% block content %}
+<div class='col-sm-6 col-sm-offset-3'>
+	<h2>{{title}} | Form</h2>
+	<hr/>
+	<div>
+		<form method="POST" action='' enctype="multipart/form-data">
+			{% csrf_token %}
+			<!-- {#{#form.as_p}} -->
+			<!-- ahora al usar django crispy forms, se modificara el forms -->
+			{{ form | crispy }}
+			<!-- crispy provides validations -->
+			<input type='submit' class='btn btn-info' value='{{title}} User' />
+		</form>
+	</div>
+	<div>	
+		<!-- se usa el posts:list por el uso de namespace y name respctiv -->
+		<p><a href="{% url 'posts:list' %}">Return to Main Page - Posts</a></p>
+	</div>
+</div>
+{% endblock content %}
