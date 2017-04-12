@@ -1,1 +1,1 @@
-# django_tut
+# Blog built in python with django framework
