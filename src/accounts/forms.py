@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth import (
-		authenticate, 
+		authenticate,
 		get_user_model,
 		login,
 		logout,
@@ -16,7 +16,7 @@ class UserLoginForm(forms.Form):
 	def clean(self, *args, **kwargs): # you can add the args or kwargs if you dont know what the mthod recieves
 		username = self.cleaned_data.get("username")
 		password = self.cleaned_data.get("password")
-		
+
 		# user_qs = User.objects.filter(username=username)
 		# if user_qs.count() ==1:
 		# 	user = user_qs.first()
@@ -40,7 +40,7 @@ class UserRegisterForm(forms.ModelForm):
 	class Meta:
 		model = User
 		fields = [
-			'username', 
+			'username',
 			'first_name',
 			'last_name',
 			'email',
@@ -86,4 +86,7 @@ class UserRegisterForm(forms.ModelForm):
 		if password != password2:
 			raise forms.ValidationError('Passwords must match!')
 
-
+class ContactForm(forms.Form):
+	name = forms.CharField(label = "Nombre")
+	email = forms.EmailField(label = "Correo Electronico")
+	

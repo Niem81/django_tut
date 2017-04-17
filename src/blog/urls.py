@@ -24,24 +24,23 @@ from django.contrib import admin
 # for redirecting to other url
 from django.views.generic import RedirectView
 
-# importing the 
+# importing the
 from accounts.views import (login_view, register_view, logout_view)
 
 urlpatterns = [
 
-    url(r'^admin/', admin.site.urls),
-    # borrar el dolar xqe sino afectara al patron de include, 
+    url(r'^ultra/adminyoyolala/', admin.site.urls),
+    # borrar el dolar xqe sino afectara al patron de include,
     # url(r'^posts/$', <appname>.views.<function_name>),
 	# url(r'^', RedirectView.as_view(url='/posts/')),
     # adding the comments url
-    url(r'^comments/', include("comments.urls", namespace='comments')), 
+    url(r'^comments/', include("comments.urls", namespace='comments')),
     url(r'^login/', login_view, name='login'),
     url(r'^logout/', logout_view, name='logout'),
-    url(r'^register/', register_view, name='register'),
+    url(r'^goin/register/', register_view, name='register'),
     url(r'^', include("posts.urls", namespace='posts')),
 ]
 
 if settings.DEBUG:
 	urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 	urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
