@@ -90,3 +90,5 @@ class ContactForm(forms.Form):
 	name = forms.CharField(label = "Nombre")
 	email = forms.EmailField(label = "Correo Electronico")
 	content = forms.TextField(label = "Mensaje")
+	update = models.DateTimeField(auto_now=True, auto_now_add=False)
+	timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
