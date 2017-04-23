@@ -89,4 +89,4 @@ class UserRegisterForm(forms.ModelForm):
 class ContactForm(forms.Form):
 	name = forms.CharField(label = "Nombre")
 	email = forms.EmailField(label = "Correo Electronico")
-	
+	content = forms.TextField(label = "Mensaje")
