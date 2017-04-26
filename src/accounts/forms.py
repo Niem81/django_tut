@@ -86,9 +86,15 @@ class UserRegisterForm(forms.ModelForm):
 		if password != password2:
 			raise forms.ValidationError('Passwords must match!')
 
-class ContactForm(forms.Form):
+class ContactForm(forms.ModelForm):
 	name = forms.CharField(label = "Nombre")
 	email = forms.EmailField(label = "Correo Electronico")
-	content = forms.TextField(label = "Mensaje")
-	update = models.DateTimeField(auto_now=True, auto_now_add=False)
-	timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
+	message = forms.TextField(label = "Mensaje")
+	class Meta:
+		model = Contact
+		fields = [
+			'name',
+			'email',
+			'message',
+			'topic'
+		]
