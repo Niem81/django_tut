@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
- 
+
 	<!-- If IE use the latest rendering engine -->
 	<!-- tell intenet explorer with the metatag that renders a compatible engine -->
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -55,6 +55,7 @@
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="{% url 'posts:list' %}">Inicio <span class="sr-only">(current)</span></a></li>
 					<li><a href="#">Acerca</a></li>
+					<li><a href="#">Contactame</a></li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Temario <span class="caret"></span></a>
 						<ul class="dropdown-menu">
@@ -90,11 +91,11 @@
 				</ul>
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
-	</nav>	
+	</nav>
 	{% include "messages_display.html" %}
 	<div class="container">
 		{% block content %}
-	
+
 		{% endblock content %}
 
 		<!-- <img src="{% static 'img/beach.jpg' %}"/> -->
@@ -148,7 +149,7 @@
 		// preview-title
 		var titleInput = $('#id_title');
 		// console.log(titleValue)
-		
+
 		function setTitle(value){
 			$('#preview-title').text(value)
 		}
