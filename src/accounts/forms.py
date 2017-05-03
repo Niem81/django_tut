@@ -5,6 +5,7 @@ from django.contrib.auth import (
 		login,
 		logout,
 	)
+from .models import Contact
 
 User = get_user_model() # we will use this with the registration
 
@@ -89,7 +90,7 @@ class UserRegisterForm(forms.ModelForm):
 class ContactForm(forms.ModelForm):
 	name = forms.CharField(label = "Nombre")
 	email = forms.EmailField(label = "Correo Electronico")
-	message = forms.TextField(label = "Mensaje")
+	message = forms.CharField(widget=forms.Textarea ,label = "Mensaje")
 	class Meta:
 		model = Contact
 		fields = [
@@ -98,3 +99,10 @@ class ContactForm(forms.ModelForm):
 			'message',
 			'topic'
 		]
+
+	def clean(self):
+		print(self.cleaned_data)
+		name = self.cleaned_data.get("name")
+		email = self.cleaned_data.get("email")
+		message = self.cleaned_data.get("message")
+		topic = self.cleaned_data.get("topic")

@@ -6,4 +6,10 @@ include/
 lib
 lib/
 media_cdn/prueba-2
-.pyc
+*.pyc
+src/*.pyc
+src/accounts/*.pyc
+src/blog/*.pyc
+src/comments/*.pyc
+src/posts/*.pyc
+src/folders/*.pyc
