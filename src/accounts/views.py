@@ -1,13 +1,15 @@
 from django.contrib.auth import (
-		authenticate, 
+		authenticate,
 		get_user_model,
 		login,
 		logout,
 	)
 
 from django.shortcuts import render, redirect
+from django.utils import timezone
+from datetime import datetime
 
-from .forms import UserLoginForm, UserRegisterForm
+from .forms import UserLoginForm, UserRegisterForm, ContactForm
 # Create your views here.
 
 def login_view(request):
@@ -46,9 +48,9 @@ def register_view(request):
 		login(request, new_user)
 		if next:
 			return redirect(next)
-		#return 
+		#return
 		return redirect('/')
-	else: 
+	else:
 		print form.errors
 
 	context = {
@@ -62,8 +64,19 @@ def logout_view(request):
 	# return render(request, "form.html", {})
 	return redirect('/')
 
+def full_contact(request):
+	print("Enter contact info")
+	title = "Contact"
+	form = ContactForm(request.POST or None)
+	if form.is_valid():
+		print("passing validation")
 
+	context = {
+		"form": form,
+		"title": title
+	}
+	return render(request, "contact.html", context)
 
-
-
-
+def home_view(request):
+	today = timezone.now().date()
+	return render(request, "home.html")

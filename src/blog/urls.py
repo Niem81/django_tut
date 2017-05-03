@@ -25,7 +25,7 @@ from django.contrib import admin
 from django.views.generic import RedirectView
 
 # importing the
-from accounts.views import (login_view, register_view, logout_view)
+from accounts.views import (login_view, register_view, logout_view, home_view, full_contact)
 
 urlpatterns = [
 
@@ -35,10 +35,12 @@ urlpatterns = [
 	# url(r'^', RedirectView.as_view(url='/posts/')),
     # adding the comments url
     url(r'^comments/', include("comments.urls", namespace='comments')),
-    url(r'^login/', login_view, name='login'),
-    url(r'^logout/', logout_view, name='logout'),
+    url(r'^goin/login/', login_view, name='login'),
+    url(r'^goin/logout/', logout_view, name='logout'),
     url(r'^goin/register/', register_view, name='register'),
-    url(r'^', include("posts.urls", namespace='posts')),
+    url(r'^blog/', include("posts.urls", namespace='posts')),
+    url(r'^', home_view, name='home'),
+    url(r'^contact/', full_contact, name='contact')
 ]
 
 if settings.DEBUG:
