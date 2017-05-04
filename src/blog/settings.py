@@ -61,7 +61,7 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-LOGIN_URL = '/login/'
+LOGIN_URL = '/goin/login/'
 ROOT_URLCONF = 'blog.urls'
 
 TEMPLATES = [

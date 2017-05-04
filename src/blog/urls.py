@@ -39,8 +39,9 @@ urlpatterns = [
     url(r'^goin/logout/', logout_view, name='logout'),
     url(r'^goin/register/', register_view, name='register'),
     url(r'^blog/', include("posts.urls", namespace='posts')),
+    url(r'^contacto/', full_contact, name='contacto'),
     url(r'^', home_view, name='home'),
-    url(r'^contact/', full_contact, name='contact')
+
 ]
 
 if settings.DEBUG:

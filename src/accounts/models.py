@@ -8,6 +8,7 @@ class Contact(models.Model):
 		('CONSULT', 'Consulting'),
 		('BLOG', 'Blog'),
 		('CONTRACT', 'Services'),
+        ('FOOD', 'Food Preparation'),
 		('OTHER', 'Others')
 	)
     name = models.CharField(max_length=200)

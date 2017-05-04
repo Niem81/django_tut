@@ -10,6 +10,7 @@ from django.utils import timezone
 from datetime import datetime
 
 from .forms import UserLoginForm, UserRegisterForm, ContactForm
+from .models import Contact
 # Create your views here.
 
 def login_view(request):
@@ -66,11 +67,19 @@ def logout_view(request):
 
 def full_contact(request):
 	print("Enter contact info")
+	next = request.GET.get('next')
 	title = "Contact"
 	form = ContactForm(request.POST or None)
 	if form.is_valid():
 		print("passing validation")
-
+		contacto = form.save(commit=False)
+		contacto.save()
+		if next:
+			return redirect(next)
+		#return
+		return redirect('/contact')
+	else:
+		print form.errors
 	context = {
 		"form": form,
 		"title": title
@@ -78,5 +87,6 @@ def full_contact(request):
 	return render(request, "contact.html", context)
 
 def home_view(request):
+	print("Go into home view")
 	today = timezone.now().date()
 	return render(request, "home.html")
