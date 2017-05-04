@@ -2,14 +2,6 @@
 {{block.super}}
 {% load crispy_forms_tags %}
 
-<style>
-{% block style %}
-h2 {
-	color: #734577;
-}
-{% endblock style %}
-</style>
-
 {% block content %}
 <div class='col-sm-6 col-sm-offset-3'>
 	<h2>{{title}} | Contact Form</h2>
@@ -21,7 +13,7 @@ h2 {
 			<!-- ahora al usar django crispy forms, se modificara el forms -->
 			{{ form | crispy }}
 			<!-- crispy provides validations -->
-			<input type='submit' class='btn btn-info' value='{{title}} User' />
+			<input type='submit' class='btn btn-info' value='Send Mail - {{title}} User' />
 		</form>
 	</div>
 	<div>
